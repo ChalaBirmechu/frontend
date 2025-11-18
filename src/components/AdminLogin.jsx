@@ -26,10 +26,11 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL || 'https://server-b6w3.onrender.com'}/api/admin/login`,
-        formData
-      );
+      const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://localhost:5173" : "https://server-b6w3.onrender.com");
+
+const response = await axios.post(`${API_URL}/api/admin/login`, formData);
 
       if (response.data.success && response.data.token) {
         localStorage.setItem('adminToken', response.data.token);
